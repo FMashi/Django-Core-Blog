@@ -1,5 +1,5 @@
 # Django-Core-Blog
-Django-Core-Blog is a simple and basic blog project built with Django. It provides essential functionality for managing posts, categories (cats), and tags. The project also includes a straightforward Bootstrap-based front-end for presentation.
+Django-Core-Blog is a simple and basic blog project built with Django. It provides essential functionality for managing posts, categories, and tags. The project also includes a straightforward Bootstrap-based front-end for presentation.
 
 ## Project Overview
 
