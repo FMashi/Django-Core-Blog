@@ -51,6 +51,7 @@ To run this project locally, follow these steps:
 4. Apply database migrations:
 
    ```bash
+   python manage.py makemigrations
    python manage.py migrate
 
 5. Create a superuser account to access the admin panel:
