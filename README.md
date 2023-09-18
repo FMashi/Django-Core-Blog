@@ -7,6 +7,8 @@ This project serves as a foundational starting point for building a blog using D
 
 - **Posts:** Create, edit, and manage blog posts with rich content using the CKEditor library.
 
+- **Comments:** Engage with readers by enabling comments on blog posts. Users can leave comments, and administrators can manage and moderate them.
+
 - **Categories:** Organize posts into categories, providing a structured way to group related content.
 
 - **Tags:** Add tags to posts to improve content discoverability and navigation.
