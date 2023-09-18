@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'blog/include/header/header.html' %}
+        <!-- Page content-->
+        <div class="container">
+            <div class="row">
+                <!-- Blog entries-->
+                <div class="col-lg-8">
+                    <!-- Featured blog post-->
+            {% if posts %}
+                    {% for post in posts %}
+                    {% ifchanged %}
+                    {% if forloop.last %}
+                    <div class="card mb-4">
+                        <a href="#!">
+                            <img class="card-img-top" src="{% if post.image %}{{ post.image.url }}{% else %}https://dummyimage.com/850x350/dee2e6/6c757d.jpg{% endif %}" alt="..." />
+                        </a>
+                        <div class="card-body">
+                            <div class="small text-muted">{{ post.created|date:'d-m-Y' }}</div>
+                            <h2 class="card-title">{{ post.title }}</h2>
+                            <p class="card-text">{{ post.content|truncatechars_html:90|safe }}</p>
+                            <a class="btn btn-primary" href="{% url 'post_detail' post.slug %}">Read more →</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endifchanged %}
+                    {% endfor %}
+            {% endif %}
+
+                    <!-- Nested row for non-featured blog posts-->
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Blog post-->
+                            {% for obj in page_obj|slice:"0:-1" %}
+                            <div class="card mb-4">
+                                {% if obj.image %}
+                                <a href=""><img class="card-img-top" src="{{ obj.image.url }}" alt="..." /></a>
+                                {% else %}
+                                <a href=""><img class="card-img-top" src="{% if obj.image %}{{ obj.image.url }}{% else %}https://dummyimage.com/850x350/dee2e6/6c757d.jpg{% endif %}" alt="..." /></a>
+                                {% endif %}
+                                <div class="card-body">
+                                    <div class="small text-muted">{{ obj.post_date|date:'d-m-Y' }}</div>
+                                    <h2 class="card-title h4">{{ obj.title }}</h2>
+                                    <p class="card-text">{{ obj.content|truncatechars_html:90|safe }}</p>
+                                    <a class="btn btn-primary" href="{% url 'post_detail' obj.slug %}">Read more →</a>
+                                </div>
+                            </div>
+                            {% if forloop.counter|divisibleby:2 %}
+                            </div>
+                            <div class="col-lg-6">
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Pagination-->
+                    {% include 'blog/include/components/pagination.html' %}
+            {% endblock %}

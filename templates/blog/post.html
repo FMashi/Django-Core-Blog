@@ -1,0 +1,60 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+        <!-- Page content-->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{post.title}}</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">{{post.created|date:'d-m-Y'}}</div>
+                            <!-- Post categories-->
+
+
+
+                        </header>
+                        <!-- Preview image figure-->
+                        <figure class="mb-4"><img class="img-fluid rounded" src="{% if post.image %}{{ post.image.url }}{% else %}https://dummyimage.com/900x400/dee2e6/6c757d.jpg{% endif %}" alt="..." /></figure>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            {{post.content|safe}}
+                        </section>
+                    </article>
+
+                   <!-- Comments section-->
+                    <section class="mb-5">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <!-- Comment form -->
+                               <form method="POST" enctype="multipart/form-data"
+                                     {% csrf_token %}
+                                    {{ comment_form.as_p }}
+                                    <button type="submit" class="btn btn-primary mb-4">Submit Comment</button>
+                                </form>
+
+                                <!-- Comments loop -->
+                                {% for comment in comments %}
+                                    <div class="d-flex mb-4">
+                                        <!-- Commenter avatar -->
+                                        <div class="flex-shrink-0"><img class="rounded-circle" src="{{ comment.author.profile.avatar.url }}" alt="{{ comment.author.username }}" width="50" height="50" /></div>
+                                        <div class="ms-3">
+                                            <div class="fw-bold">{{ comment.author.username }}</div>
+                                            {{ comment.content }}
+                                        </div>
+                                    </div>
+                                {% empty %}
+                                    <p>No comments yet.</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+
+{% endblock %}
