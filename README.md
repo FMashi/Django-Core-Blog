@@ -93,3 +93,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
    This README provides an overview of your Django project, installation instructions, usage guidance, information about dependencies, and hints for future development. You can extend it further to include more details, such as project structure, customization instructions, and contribution guidelines, based on your specific project requirements.
 
+
