@@ -7,6 +7,8 @@ This project serves as a foundational starting point for building a blog using D
 
 - **Posts:** Create, edit, and manage blog posts with rich content using the CKEditor library.
 
+- **Comments:** Engage with readers by enabling comments on blog posts. Users can leave comments, and administrators can manage and moderate them.
+
 - **Categories:** Organize posts into categories, providing a structured way to group related content.
 
 - **Tags:** Add tags to posts to improve content discoverability and navigation.
@@ -37,13 +39,22 @@ To run this project locally, follow these steps:
 
    ```bash
    git clone https://github.com/FMashi/Django-Core-Blog.git
+   cd Django-Core-Blog
  
 2. Create a virtual environment and activate it:
+On macOS and Linux:
 
    ```bash
+   On macOS and Linux:
+   
    python -m venv venv
-   source venv/bin/activate  # On Windows, use 'venv\Scripts\activate'
- 
+   source venv/bin/activate
+
+   On Windows:
+   
+   python -m venv venv
+   venv\Scripts\activate
+   
 3. Install project dependencies:
    ```bash
    pip install -r requirements.txt
@@ -89,7 +100,7 @@ This project can be further developed and extended to include additional feature
 This project is licensed under the MIT License - see the LICENSE file for details.
 
    ```vbnet
-   Please replace `"https://github.com/yourusername/Django-Core-Blog.git"` with the actual URL of your project's GitHub repository.
+   Please replace `"https://github.com/FMashi/Django-Core-Blog.git"` with the actual URL of your project's GitHub repository.
 
-   This README provides an overview of your Django project, installation instructions, usage guidance, information about dependencies, and hints for future development. You can extend it further to include more details, such as project structure, customization instructions, and contribution guidelines, based on your specific project requirements.
+   This README provides an overview of Django Core Blog, installation instructions, usage guidance, information about dependencies, and hints for future development. You can extend it further to include more details, such as project structure, customization instructions, and contribution guidelines, based on your specific project requirements.
 
