@@ -103,4 +103,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
    Please replace `"https://github.com/FMashi/Django-Core-Blog.git"` with the actual URL of your project's GitHub repository.
 
    This README provides an overview of Django Core Blog, installation instructions, usage guidance, information about dependencies, and hints for future development. You can extend it further to include more details, such as project structure, customization instructions, and contribution guidelines, based on your specific project requirements.
-
