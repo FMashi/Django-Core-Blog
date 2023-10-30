@@ -108,7 +108,7 @@ class Post(models.Model):
 
 
     def get_absolute_url(self):
-        return '/post_detail/{}'.format(self.slug)
+        return '/blog/{}'.format(self.slug)
 
 
 class Comment(models.Model):
