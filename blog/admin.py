@@ -1,46 +1,34 @@
 from django.contrib import admin
 from .models import Category,Comment,Post,Tag
 from django.template.defaultfilters import slugify
+from django.utils.html import format_html
 
+def make_draft(modeladmin, request, queryset):
+    queryset.update(active=False)
 
-def copy_posts(self, request, queryset):
-    for post in queryset:
-        # Create a new instance with a new primary key
-        new_post = post
-        new_post.pk = None
-        new_post.id = None  # Set id to None to ensure a new record is created
+make_draft.short_description = "Mark selected drafts"
 
-        # Generate a unique title and slug for the new post
-        original_title = new_post.title
-        original_slug = new_post.slug
-        new_title = f"{original_title} (Copy)"
-        new_slug = slugify(original_slug)
+def publish_posts(modeladmin, request, queryset):
+    queryset.update(active=True)
 
-        # Check if the new title or slug is not unique and append a counter
-        counter = 1
-        while Post.objects.filter(title=new_title).exists() or Post.objects.filter(slug=new_slug).exists():
-            new_title = f"{original_title} (Copy {counter})"
-            new_slug = f"{slugify(original_slug)}-{counter}"
-            counter += 1
-
-        new_post.title = new_title
-        new_post.slug = new_slug
-        new_post.save()
-
-
-copy_posts.short_description = "Copy selected posts"  # Action description
-
-
+publish_posts.short_description = "Publish selected"
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'created', 'active')
+    list_display = ('display_image','title', 'author', 'created', 'active')
     list_filter = ('active', 'created', 'author', 'category')
     search_fields = ('title', 'content')
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'created'
     ordering = ('active', 'created')
-    actions = [copy_posts]
+    actions = [make_draft, publish_posts]
+    def display_image(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="50" height="50" style="object-fit: cover; border-radius: 50%;" />', obj.image.url)
+        else:
+            return 'No Image'
+    display_image.short_description = 'Image'
+
 
     @admin.action(description='Mark selected posts as published')
     def make_published(self, request, queryset):
@@ -57,6 +45,7 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
     ordering = ('name',)
+    actions = [make_draft, publish_posts]
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
@@ -65,6 +54,7 @@ class TagAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
     ordering = ('name',)
+    actions = [make_draft, publish_posts]
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
@@ -72,6 +62,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('approved_comment', 'created', 'author')
     search_fields = ('author', 'content')
     ordering = ('approved_comment', 'created')
+    actions = [make_draft, publish_posts]
 
 
 
